@@ -277,9 +277,18 @@ form button[disabled]{opacity:.7;cursor:wait}
 
 /* ---------- TELEMÓVEL / TABLET ---------- */
 @media (max-width:1020px){
-  .menu{position:fixed;inset:86px 0 auto 0;background:var(--papel);flex-direction:column;align-items:flex-start;padding:30px 28px;gap:20px;box-shadow:0 20px 40px rgba(0,0,0,.15);translate:0 -140%;transition:translate .35s}
-  .menu.aberto{translate:0 0}
-  .menu a:not(.btn){color:var(--tinta)!important;font-size:1.5rem}
+  /* sem o efeito de desfocar: ele "prendia" o menu à altura do cabeçalho e o menu ficava estreito */
+  header.solido{backdrop-filter:none;background:var(--papel)}
+  /* menu em ecrã inteiro, por baixo do cabeçalho */
+  .menu{position:fixed;inset:86px 0 0 0;background:var(--papel);flex-direction:column;align-items:stretch;justify-content:flex-start;padding:16px 28px 110px;gap:0;overflow-y:auto;translate:0 -140%;visibility:hidden;transition:translate .35s,visibility .35s}
+  .menu.aberto{translate:0 0;visibility:visible}
+  .menu li{border-bottom:1px solid var(--linha)}
+  .menu li:last-child{border-bottom:0;margin-top:28px}
+  .menu a:not(.btn){display:block;padding:18px 0;color:var(--tinta)!important;font-size:2rem}
+  .menu a.ativo:not(.btn){color:var(--vermelho)!important}
+  .menu a:not(.btn)::after{display:none}
+  .menu .btn{width:100%;justify-content:center;padding:18px;font-size:1.25rem}
+  body:has(.menu.aberto){overflow:hidden}
   .burger{display:grid;place-items:center}
 }
 @media (max-width:900px){
@@ -312,7 +321,7 @@ form button[disabled]{opacity:.7;cursor:wait}
   header.solido .marca img{height:60px}
   .nav{height:96px}
   header.solido .nav{height:74px}
-  .menu{inset:74px 0 0 0;overflow-y:auto}
+  .menu{inset:74px 0 0 0}
   .hero h1{font-size:clamp(3.4rem,17vw,5rem)}
   .acoes .btn{flex:1;justify-content:center}
   .topo-pag h1{font-size:clamp(3rem,15vw,4.4rem)}
