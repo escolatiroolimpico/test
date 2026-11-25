@@ -3,36 +3,64 @@
    Aqui mudas o MENU, o RODAPÉ, a EQUIPA e a GALERIA.
    ========================================================= */
 
+/* ---------- 0. NOME DA SECÇÃO DE ARTIGOS (provisório) ----------
+   Muda só aqui e muda no menu, no rodapé e nos títulos das páginas.
+   Outras ideias: "Blog", "Artigos", "Diário de Tiro", "Na Linha de Tiro" */
+const NOME_NOTICIAS = "Notícias";
+
 /* ---------- 1. MENU (muda aqui e muda em todas as páginas) ---------- */
 const MENU = [
   ["escola.html",    "A Escola"],
-  ["aulas.html",     "Aulas & Horários"],
+  ["aulas.html",     "Horários & Preçário"],
   ["equipa.html",    "Equipa"],
   ["eventos.html",   "Eventos"],
+  ["noticias.html",  NOME_NOTICIAS],
   ["galeria.html",   "Galeria"],
   ["contactos.html", "Contactos"],
 ];
 
 /* ---------- 2. EQUIPA ---------- */
+/* Para cada pessoa:
+   foto:         nome do ficheiro dentro de imagens/equipa (ex.: "francisco-algarvio.jpg"). Vazio = mostra as iniciais.
+   bio:          uma descrição curta da pessoa. Vazio = mostra "Biografia em breve."
+   certificados: link para os certificados (ex.: um PDF em imagens/equipa ou um link do Google Drive). Vazio = sem link. */
 const EQUIPA = [
-  ["Francisco Algarvio", "Mentor e treinador"],
-  ["José Carlos",        "Responsável pela formação e pela organização das competições"],
-  ["Daniel Gonçalves",   "Treinador"],
-  ["José Figueiredo",    "Treinador"],
-  ["Lígia Trepado",      "Atleta e treinadora"],
-  ["Luís Paz",           "Staff técnico e treinador"],
-  ["António Coelho",     "Juiz-árbitro"],
-  ["Rodrigo Algarvio",   "Técnico de operações"],
-  ["Felipe Puttim",      "Técnico de operações"],
-  ["Francisco Geraldes", "Técnico de operações"],
+  { nome: "Francisco Algarvio", funcao: "Mentor e treinador",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "José Carlos", funcao: "Responsável pela formação e pela organização das competições",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "Daniel Gonçalves", funcao: "Treinador",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "José Figueiredo", funcao: "Treinador",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "Lígia Trepado", funcao: "Atleta e treinadora",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "Luís Paz", funcao: "Staff técnico e treinador",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "António Coelho", funcao: "Juiz-árbitro",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "Rodrigo Algarvio", funcao: "Técnico de operações",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "Felipe Puttim", funcao: "Técnico de operações",
+    foto: "", bio: "",
+    certificados: "" },
+  { nome: "Francisco Geraldes", funcao: "Técnico de operações",
+    foto: "", bio: "",
+    certificados: "" },
 ];
 
-/* ---------- 3. GALERIA (põe a foto na pasta "imagens" e escreve o nome aqui) ---------- */
+/* ---------- 3. GALERIA (põe a foto na pasta "imagens/galeria" e escreve o nome aqui, pela ordem em que deve aparecer) ---------- */
 const GALERIA = [
-  "carreira.jpg","hero-atleta.jpg","inaug-podio.jpg","alvos.jpg",
-  "atletas-sorriso.jpg","inaug-atleta.jpg","corredor.jpg","inaug-jovens.jpg",
-  "postos.jpg","inaug-premio.jpg","alvo-13.jpg","inaug-grupo.jpg",
-  "inaug-treinador.jpg","inaug-publico.jpg","atleta-casaco.jpg","panorama.jpg",
+  "01.jpg","02.jpg","03.jpg","04.jpg","05.jpg","06.jpg","07.jpg","08.jpg",
+  "09.jpg","10.jpg","11.jpg","12.jpg","13.jpg","14.jpg","15.jpg","16.jpg",
 ];
 
 /* ---------- Contactos (usados no rodapé e no botão WhatsApp) ---------- */
@@ -41,12 +69,26 @@ const EMAIL = "escolatiroolimpico@gmail.com";
 const INSTAGRAM = "https://www.instagram.com/escolatiroolimpico/";
 const FACEBOOK = "https://www.facebook.com/p/Escola-de-Forma%C3%A7%C3%A3o-de-Tiro-Ol%C3%ADmpico-61560631461698/";
 const YOUTUBE = "https://www.youtube.com/@escolatiroolimpico";
+const MORADA = "Rua Ferreira Soares, 58<br>2810-296 Almada";
+const MAPS = "https://maps.google.com/?q=Rua+Ferreira+Soares+58+2810-296+Almada";
+
+/* ---------- 4. PARCEIROS (aparecem no rodapé de todas as páginas) ----------
+   logo: ficheiro dentro de imagens/parceiros (ex.: "camara-almada.png"). Vazio = mostra um espaço reservado.
+   link: site do parceiro (opcional). Para tirar um espaço, apaga a linha toda. */
+const PARCEIROS = [
+  { nome: "Parceiro 1", logo: "", link: "" },
+  { nome: "Parceiro 2", logo: "", link: "" },
+  { nome: "Parceiro 3", logo: "", link: "" },
+  { nome: "Parceiro 4", logo: "", link: "" },
+  { nome: "Parceiro 5", logo: "", link: "" },
+];
 
 /* =========================================================
    A partir daqui é o "motor" — normalmente não precisas mexer.
    ========================================================= */
 const seta = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-const paginaAtual = location.pathname.split("/").pop() || "index.html";
+let paginaAtual = location.pathname.split("/").pop() || "index.html";
+if (paginaAtual.startsWith("artigo")) paginaAtual = "noticias.html"; // um artigo acende "Notícias" no menu
 const telLink = "tel:" + TELEFONE.replace(/\s/g, "");
 const ICONES = {
   ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
@@ -54,20 +96,23 @@ const ICONES = {
   yt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .6 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5zM9.7 15.1V8.9l5.6 3.1z"/></svg>',
 };
 
+const ICONE_MENU = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>';
+const ICONE_FECHAR = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const ic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">${d}</svg>`;
+
 /* Cabeçalho */
 document.body.insertAdjacentHTML("afterbegin", `
 <header id="topo">
   <div class="wrap nav">
     <a href="index.html" class="marca" aria-label="EFTO — Escola de Formação de Tiro Olímpico, página inicial">
-      <img class="logo-branco" src="imagens/logo-branco.png" alt="Logótipo da Escola de Formação de Tiro Olímpico">
-      <img class="logo-cor" src="imagens/logo-cor.png" alt="" aria-hidden="true">
+      <img class="logo-branco" src="imagens/logos/logo-branco.png" alt="Logótipo da Escola de Formação de Tiro Olímpico">
+      <img class="logo-cor" src="imagens/logos/logo-cor.png" alt="" aria-hidden="true">
     </a>
-    <button class="burger" aria-label="Abrir menu" id="burger">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
+    <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu" id="burger">${ICONE_MENU}</button>
     <ul class="menu" id="menu">
-      ${MENU.map(([url, nome]) => `<li><a href="${url}"${url === paginaAtual ? ' class="ativo"' : ""}>${nome}</a></li>`).join("")}
+      ${MENU.map(([url, nome]) => `<li><a href="${url}"${url === paginaAtual ? ' class="ativo" aria-current="page"' : ""}>${nome}</a></li>`).join("")}
       <li><a href="contactos.html#form" class="btn btn-pri">Aula experimental</a></li>
+      <li class="menu-extra"><a href="${telLink}">${TELEFONE}</a> · <a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
   </div>
 </header>`);
@@ -78,12 +123,25 @@ document.body.insertAdjacentHTML("beforeend", `
 ${semCta ? "" : `<section class="cta"><div class="wrap"><h2>Pronto para o<br>primeiro disparo?</h2><a class="btn" href="contactos.html#form">Marcar aula experimental ${seta}</a></div></section>`}
 <footer>
   <div class="wrap">
+    <div class="parceiros">
+      <h4>Parceiros e apoios</h4>
+      <div class="parc-lista">${PARCEIROS.map(p => {
+        if (!p.logo) return `<span class="parc parc-vazio">${p.nome}</span>`;
+        const img = `<img src="imagens/parceiros/${p.logo}" alt="${p.nome}" loading="lazy">`;
+        return p.link ? `<a class="parc" href="${p.link}" target="_blank" rel="noopener">${img}</a>` : `<span class="parc">${img}</span>`;
+      }).join("")}</div>
+    </div>
     <div class="rod-grid">
-      <div><img class="logo-rodape" src="imagens/logo-branco.png" alt="EFTO"><p>Escola de Formação de Tiro Olímpico.<br>Da iniciação à competição, em Almada.</p>
+      <div><img class="logo-rodape" src="imagens/logos/logo-branco.png" alt="EFTO" loading="lazy"><p>Escola de Formação de Tiro Olímpico.<br>Da iniciação à competição, em Almada.</p>
         <div class="redes"><a href="${INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">${ICONES.ig}</a><a href="${FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">${ICONES.fb}</a><a href="${YOUTUBE}" target="_blank" rel="noopener" aria-label="YouTube">${ICONES.yt}</a></div></div>
       <div><h4>Páginas</h4><ul>${MENU.map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join("")}</ul></div>
-      <div><h4>Aulas</h4><ul><li>Segunda e quarta</li><li>19:00 – 20:30</li><li>20:30 – 22:00</li></ul></div>
-      <div><h4>Contacto</h4><ul><li><a href="${telLink}">${TELEFONE}</a></li><li><a href="mailto:${EMAIL}">${EMAIL}</a></li><li>Rua Ferreira Soares, 58<br>2810-296 Almada</li></ul></div>
+      <div><h4>Aulas</h4><ul><li>Segunda e quarta</li><li>19:00 – 20:30</li><li>20:30 – 22:00</li></ul>
+        <div class="rod-cta"><a class="btn btn-pri" href="contactos.html#form">Aula experimental</a><a class="btn btn-contorno" href="contactos.html?tipo=atleta#form">Inscrever-me como atleta</a></div></div>
+      <div><h4>Contacto</h4><ul>
+        <li class="ic-linha">${ic('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>')}<a href="${telLink}">${TELEFONE}</a></li>
+        <li class="ic-linha">${ic('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>')}<a href="mailto:${EMAIL}">${EMAIL}</a></li>
+        <li class="ic-linha">${ic('<path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')}<a href="${MAPS}" target="_blank" rel="noopener">${MORADA}</a></li>
+      </ul></div>
     </div>
     <div class="rod-fim"><span>© ${new Date().getFullYear()} EFTO — Escola de Formação de Tiro Olímpico</span><span><a href="privacidade.html">Privacidade e cookies</a> · <button type="button" class="link-btn" id="abrirCookies">Definições de cookies</button></span></div>
   </div>
@@ -97,35 +155,87 @@ ${semCta ? "" : `<section class="cta"><div class="wrap"><h2>Pronto para o<br>pri
   <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 12 2.2a9.8 9.8 0 0 1 0 19.6zM12 0a12 12 0 0 0-10.3 18.1L0 24l6.1-1.6A12 12 0 1 0 12 0z"/></svg>
 </a>`);
 
-/* Cabeçalho fica sólido ao descer */
+/* Nome da secção de artigos: preenche todos os sítios marcados com data-nome-noticias */
+document.querySelectorAll("[data-nome-noticias]").forEach(el => { el.textContent = NOME_NOTICIAS; });
+document.title = document.title.replace("Notícias", NOME_NOTICIAS);
+
+/* Filtros por categoria (página de notícias) */
+const filtros = document.querySelectorAll(".filtro");
+filtros.forEach(botao => botao.addEventListener("click", () => {
+  const cat = botao.dataset.cat;
+  filtros.forEach(b => b.setAttribute("aria-pressed", b === botao ? "true" : "false"));
+  document.querySelectorAll("[data-cat-artigo]").forEach(art => {
+    art.hidden = cat !== "todas" && art.dataset.catArtigo !== cat;
+  });
+}));
+
+/* Botões de partilha (página de artigo) */
+const partilha = document.querySelector(".partilha");
+if (partilha) {
+  const url = encodeURIComponent(location.href), titulo = encodeURIComponent(document.title);
+  partilha.querySelector("[data-rede=fb]").href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  partilha.querySelector("[data-rede=wa]").href = `https://wa.me/?text=${titulo}%20${url}`;
+  const copiar = partilha.querySelector("[data-rede=link]");
+  copiar.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(location.href); copiar.setAttribute("aria-label", "Link copiado"); copiar.classList.add("ok"); }
+    catch (e) { prompt("Copie o link:", location.href); }
+  });
+}
+
+/* Cabeçalho fica sólido ao descer (ou com o menu aberto) */
 const topo = document.getElementById("topo");
-const aoDescer = () => topo.classList.toggle("solido", scrollY > 40);
+const menu = document.getElementById("menu");
+const burger = document.getElementById("burger");
+const aoDescer = () => topo.classList.toggle("solido", scrollY > 40 || menu.classList.contains("aberto"));
 aoDescer(); addEventListener("scroll", aoDescer, { passive: true });
 
-/* Menu do telemóvel */
-const menu = document.getElementById("menu");
-document.getElementById("burger").onclick = () => { menu.classList.toggle("aberto"); topo.classList.add("solido"); };
-menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => menu.classList.remove("aberto")));
+/* Menu do telemóvel: abre/fecha no botão ☰/✕, ao escolher uma página, com a tecla Esc ou ao alargar o ecrã */
+const abrirMenu = abrir => {
+  menu.classList.toggle("aberto", abrir);
+  burger.setAttribute("aria-expanded", abrir);
+  burger.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
+  burger.innerHTML = abrir ? ICONE_FECHAR : ICONE_MENU;
+  aoDescer();
+};
+burger.onclick = () => abrirMenu(!menu.classList.contains("aberto"));
+menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => abrirMenu(false)));
+addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("aberto")) { abrirMenu(false); burger.focus(); } });
+matchMedia("(min-width:1201px)").addEventListener("change", e => { if (e.matches) abrirMenu(false); });
 
 /* Equipa (só nas páginas que têm <div id="equipaGrid">) */
 const eq = document.getElementById("equipaGrid");
 if (eq) {
   const cores = ["var(--vermelho)", "var(--amarelo)", "var(--verde)", "var(--navy-700)"];
-  eq.innerHTML = EQUIPA.map(([nome, funcao], i) => {
-    const iniciais = nome.split(" ").map(p => p[0]).slice(0, 2).join("");
-    return `<div class="membro rv${i === 0 ? " destaque" : ""}"><span class="avatar" style="background:${cores[i % 4]}">${iniciais}</span><div><h3>${nome}</h3><p>${funcao}</p></div></div>`;
+  eq.innerHTML = EQUIPA.map((m, i) => {
+    const iniciais = m.nome.split(" ").map(p => p[0]).slice(0, 2).join("");
+    const foto = m.foto
+      ? `<img class="membro-foto" src="imagens/equipa/${m.foto}" alt="${m.nome}" loading="lazy">`
+      : `<span class="membro-foto avatar" style="background:${cores[i % 4]}">${iniciais}</span>`;
+    const cert = m.certificados
+      ? `<a class="membro-cert" href="${m.certificados}" target="_blank" rel="noopener">Ver certificados →</a>`
+      : `<span class="membro-cert sem">Certificados em breve</span>`;
+    return `<article class="membro rv">
+      <div class="membro-lado"><h3>${m.nome}</h3><span class="membro-funcao">${m.funcao}</span>${foto}</div>
+      <div class="membro-texto"><p>${m.bio || "Biografia em breve."}</p>${cert}</div>
+    </article>`;
   }).join("");
 }
 
-/* Galeria + visualizador (data-limite="6" mostra só 6 fotos) */
+/* Galeria + visualizador
+   - página Galeria: mostra todas as fotos
+   - página inicial (class "gal-mini"): mostra só as primeiras (data-limite) em miniatura + um quadrado "Ver mais"
+   O visualizador deixa sempre passar por TODAS as fotos com as setas. */
 const gal = document.getElementById("gal");
 if (gal) {
-  const fotos = GALERIA.slice(0, +gal.dataset.limite || GALERIA.length);
-  gal.innerHTML = fotos.map((f, i) => `<button data-i="${i}" class="rv"><img loading="lazy" src="imagens/${f}" alt="Fotografia da EFTO ${i + 1}"></button>`).join("");
+  const fotos = GALERIA;
+  const limite = +gal.dataset.limite || fotos.length;
+  const mini = gal.classList.contains("gal-mini");
+  gal.innerHTML = fotos.slice(0, limite).map((f, i) => `<button data-i="${i}" class="rv" aria-label="Ampliar fotografia ${i + 1}"><img loading="lazy" src="imagens/galeria/${f}" alt="Fotografia da EFTO ${i + 1}"></button>`).join("")
+    + (mini ? `<a class="gal-mais rv" href="galeria.html" style="background-image:url(imagens/galeria/${fotos[limite % fotos.length]})"><span><b>Ver mais</b>${fotos.length} fotos →</span></a>` : "");
   document.body.insertAdjacentHTML("beforeend", `<div class="lightbox" id="lb" role="dialog" aria-label="Fotografia ampliada"><button class="lb-btn lb-fechar" id="lbX" aria-label="Fechar">×</button><button class="lb-btn lb-ant" id="lbA" aria-label="Anterior">‹</button><img id="lbImg" alt=""><button class="lb-btn lb-seg" id="lbS" aria-label="Seguinte">›</button></div>`);
   const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg");
   let atual = 0;
-  const mostra = i => { atual = (i + fotos.length) % fotos.length; lbImg.src = "imagens/" + fotos[atual]; lb.classList.add("aberto"); };
+  const mostra = i => { atual = (i + fotos.length) % fotos.length; lbImg.src = "imagens/galeria/" + fotos[atual]; lb.classList.add("aberto"); };
   const fecha = () => lb.classList.remove("aberto");
   gal.addEventListener("click", e => { const b = e.target.closest("button"); if (b) mostra(+b.dataset.i); });
   document.getElementById("lbX").onclick = fecha;
@@ -145,6 +255,28 @@ if (gal) {
    IMPORTANTE: no 1.º envio, a FormSubmit manda um email de ativação para
    a caixa da escola — é preciso clicar em "Activate Form" uma única vez. */
 const form = document.getElementById("form");
+
+/* Formulário com 2 tipos de pedido: "Aula experimental" ou "Inscrição como atleta".
+   O link contactos.html?tipo=atleta#form abre logo na inscrição. */
+const TIPOS = {
+  aula:   { titulo: "Pedido de aula experimental", assunto: "Novo pedido de aula experimental", msg: "Idade, experiência anterior, dúvidas…", turma: "Turma preferida" },
+  atleta: { titulo: "Inscrição como atleta",       assunto: "Nova inscrição de atleta",          msg: "Idade, disciplina (carabina/pistola), clube atual, experiência…", turma: "Turma pretendida" },
+};
+let tipoPedido = new URLSearchParams(location.search).get("tipo") === "atleta" ? "atleta" : "aula";
+if (form) {
+  form.insertAdjacentHTML("afterbegin", `<div class="form-tipo" role="group" aria-label="Tipo de pedido">
+    <button type="button" data-tipo="aula">Aula experimental</button><button type="button" data-tipo="atleta">Inscrição como atleta</button></div>`);
+  const mudaTipo = t => {
+    tipoPedido = t;
+    form.querySelectorAll("[data-tipo]").forEach(b => b.setAttribute("aria-pressed", b.dataset.tipo === t));
+    form.querySelector("h3").textContent = TIPOS[t].titulo;
+    const msg = form.querySelector("textarea[name=msg]"); if (msg) msg.placeholder = TIPOS[t].msg;
+    const lt = form.querySelector("select[name=turma]")?.closest("label"); if (lt) lt.firstChild.textContent = TIPOS[t].turma;
+  };
+  form.querySelector(".form-tipo").addEventListener("click", e => { const b = e.target.closest("[data-tipo]"); if (b) mudaTipo(b.dataset.tipo); });
+  mudaTipo(tipoPedido);
+}
+
 if (form) form.addEventListener("submit", async e => {
   e.preventDefault();
   const d = new FormData(form);
@@ -158,10 +290,11 @@ if (form) form.addEventListener("submit", async e => {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
-        _subject: `Novo pedido de aula experimental — ${d.get("nome")}`,
+        _subject: `${TIPOS[tipoPedido].assunto} — ${d.get("nome")}`,
         _template: "table",
         _captcha: "false",
         _replyto: d.get("email") || undefined,
+        "Tipo de pedido": TIPOS[tipoPedido].titulo,
         "Nome": d.get("nome"),
         "Telefone": d.get("tel"),
         "Email": d.get("email") || "(não indicado)",
@@ -173,7 +306,9 @@ if (form) form.addEventListener("submit", async e => {
     if (!r.ok || res.success === "false" || res.success === false) throw new Error(res.message || "erro");
     form.reset();
     estado.className = "estado ok";
-    estado.textContent = "Pedido enviado! Entraremos em contacto consigo muito em breve.";
+    estado.textContent = tipoPedido === "atleta"
+      ? "Inscrição enviada! Entraremos em contacto consigo muito em breve."
+      : "Pedido enviado! Entraremos em contacto consigo muito em breve.";
   } catch (err) {
     estado.className = "estado erro";
     estado.innerHTML = `Não foi possível enviar agora. Ligue-nos para o <a href="${telLink}">${TELEFONE}</a> ou escreva para <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
@@ -221,6 +356,26 @@ document.addEventListener("click", e => {
 });
 aplicarCookies();
 
-/* Animação ao aparecer no ecrã */
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: .12 });
-document.querySelectorAll(".rv").forEach(el => io.observe(el));
+/* ---------- ANIMAÇÕES AO FAZER SCROLL ----------
+   Só usam opacidade e movimento (o mais leve para o browser). Cada elemento anima uma única vez. */
+const semMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// títulos e textos de introdução das secções também aparecem com fade
+document.querySelectorAll(".sec .wrap > .etiqueta, .sec .wrap > h2, .sec .wrap > .lead, .sec-topo, .topo-pag .wrap > *")
+  .forEach(el => { if (!el.closest(".rv")) el.classList.add("rv"); });
+// blocos de duas colunas: um entra pela esquerda e o outro pela direita
+document.querySelectorAll(".duas-col > .rv:first-child").forEach(el => el.classList.add("rv-esq"));
+document.querySelectorAll(".duas-col > .rv:last-child:not(:first-child), .inclusivo-fotos").forEach(el => el.classList.add("rv-dir"));
+// grelhas de cartões: aparecem em cascata, um a seguir ao outro
+document.querySelectorAll(".passos, .art-grid, .ev-grid, .perfis, .precos, .equipa-grid, .gal, .valores, .ct-info").forEach(g =>
+  [...g.children].forEach((c, i) => { c.classList.add("rv"); c.style.transitionDelay = Math.min(i % 8, 5) * 90 + "ms"; }));
+// cabeçalho das subpáginas: em cascata
+document.querySelectorAll(".topo-pag .wrap > .rv").forEach((el, i) => { el.style.transitionDelay = i * 100 + "ms"; });
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target;
+  el.classList.add("on"); io.unobserve(el);
+  setTimeout(() => { el.style.transitionDelay = ""; }, 1400); // depois de aparecer, o hover reage sem atraso
+}), { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+document.querySelectorAll(".rv").forEach(el => semMovimento ? el.classList.add("on") : io.observe(el));

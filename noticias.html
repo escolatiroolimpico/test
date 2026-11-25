@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a1124">
+<title>Notícias · EFTO | Tiro Olímpico em Almada</title>
+<meta name="description" content="Notícias da Escola de Formação de Tiro Olímpico: resultados de provas, dicas de treino e entrevistas com os nossos atletas.">
+<link rel="icon" href="imagens/logos/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/estilo.css?v=16">
+</head>
+<body>
+
+<section class="topo-pag">
+  <div class="fundo" style="background-image:url(imagens/noticias/topo-fundo.jpg)"></div>
+  <div class="wrap">
+    <div class="migalhas"><a href="index.html">Início</a> / <span data-nome-noticias>Notícias</span></div>
+    <h1 data-nome-noticias>Notícias</h1>
+    <p>Notícias da escola, resultados de provas, dicas de treino e entrevistas com os nossos atletas.</p>
+  </div>
+  <div class="tricolor"></div>
+</section>
+
+<section class="sec" style="padding-top:70px">
+  <div class="wrap">
+
+    <!-- Categorias: o botão filtra os artigos com o mesmo data-cat-artigo -->
+    <div class="filtros" role="group" aria-label="Filtrar por categoria">
+      <button type="button" class="filtro" data-cat="todas" aria-pressed="true">Todas</button>
+      <button type="button" class="filtro" data-cat="escola" aria-pressed="false">Notícias da escola</button>
+      <button type="button" class="filtro" data-cat="resultados" aria-pressed="false">Resultados</button>
+      <button type="button" class="filtro" data-cat="dicas" aria-pressed="false">Dicas de treino</button>
+      <button type="button" class="filtro" data-cat="entrevistas" aria-pressed="false">Entrevistas</button>
+    </div>
+
+    <!-- ARTIGO EM DESTAQUE (o mais recente) -->
+    <a class="art-destaque" href="artigo-sports-club-madeira.html" data-cat-artigo="escola">
+      <img loading="lazy" src="imagens/noticias/artigo-sports-club-madeira.jpg" alt="Atletas e equipa do Sports Club da Madeira em frente ao painel da EFTO" style="object-position:center 40%">
+      <div class="corpo">
+        <div class="art-meta"><span class="cat novo">Mais recente</span><span class="cat">Notícias da escola</span><span>19 set 2026</span></div>
+        <h2>Sports Club da Madeira em visita à EFTO</h2>
+        <p>Os atletas madeirenses assistiram à 7.ª prova do Troféu BIG, conheceram a escola e experimentaram o nosso equipamento.</p>
+        <span class="ler">Ler artigo →</span>
+      </div>
+    </a>
+
+    <!-- RESTANTES ARTIGOS — para acrescentar um, copie um bloco <a class="art"> inteiro -->
+    <div class="art-grid" style="margin-top:24px">
+      <a class="art" href="artigo.html" data-cat-artigo="dicas">
+        <img loading="lazy" src="imagens/noticias/artigo-respiracao.jpg" alt="Atleta da EFTO a fazer pontaria" style="object-position:center 30%">
+        <div class="corpo">
+          <div class="art-meta"><span class="cat">Dicas de treino</span><span>[data]</span></div>
+          <h3>Respiração e disparo: 5 dicas para quem está a começar</h3>
+          <p>[Texto provisório] Como a respiração influencia a pontaria e que hábitos simples ajudam a manter a calma no posto de tiro.</p>
+          <span class="ler">Ler mais →</span>
+        </div>
+      </a>
+      <a class="art" href="artigo.html" data-cat-artigo="resultados">
+        <img loading="lazy" src="imagens/noticias/artigo-resultados.jpg" alt="Jovens atletas no pódio">
+        <div class="corpo">
+          <div class="art-meta"><span class="cat">Resultados</span><span>[data]</span></div>
+          <h3>Resultados da [N.ª] jornada do Troféu BIG</h3>
+          <p>[Texto provisório] Classificações, recordes pessoais e os destaques dos atletas da EFTO na última prova.</p>
+          <span class="ler">Ler mais →</span>
+        </div>
+      </a>
+      <a class="art" href="artigo.html" data-cat-artigo="entrevistas">
+        <img loading="lazy" src="imagens/noticias/artigo-entrevista.jpg" alt="Atleta da EFTO">
+        <div class="corpo">
+          <div class="art-meta"><span class="cat">Entrevista</span><span>[data]</span></div>
+          <h3>À conversa com [nome do atleta]</h3>
+          <p>[Texto provisório] Como começou no tiro, o que mais gosta na modalidade e os objetivos para esta temporada.</p>
+          <span class="ler">Ler mais →</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="mais"><a href="#" class="btn btn-esc">Ver artigos anteriores</a></div>
+  </div>
+</section>
+
+<script src="js/site.js?v=12"></script>
+</body>
+</html>

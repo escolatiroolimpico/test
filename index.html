@@ -3,29 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a1124">
 <title>EFTO · Escola de Formação de Tiro Olímpico | Almada</title>
 <meta name="description" content="Escola de Formação de Tiro Olímpico em Almada e Corroios. Aulas de tiro desportivo da iniciação à competição. Marque já a sua aula experimental.">
-<link rel="icon" href="imagens/logo.png">
+<link rel="icon" href="imagens/logos/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilo.css?v=3">
+<link rel="preload" as="image" href="imagens/inicio/topo-fundo.jpg">
+<link rel="stylesheet" href="css/estilo.css?v=16">
 </head>
 <body>
 
+<!-- ENTRADA: imagem de fundo em ecrã inteiro (imagens/inicio/topo-fundo.jpg).
+     PARA USAR UM VÍDEO: põe o ficheiro em imagens/inicio/topo-video.mp4 e tira os sinais de comentário
+     à volta da linha <video> abaixo. A imagem continua a aparecer enquanto o vídeo carrega. -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <svg class="mira" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1.2"><circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="72"/><circle cx="100" cy="100" r="48"/><circle cx="100" cy="100" r="24"/><circle cx="100" cy="100" r="4" fill="#fff"/><path d="M100 0v200M0 100h200"/></svg>
+  <!-- <video class="hero-video" src="imagens/inicio/topo-video.mp4" autoplay muted loop playsinline poster="imagens/inicio/topo-fundo.jpg"></video> -->
+  <svg class="mira" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1.2" aria-hidden="true"><circle cx="100" cy="100" r="96"/><circle cx="100" cy="100" r="72"/><circle cx="100" cy="100" r="48"/><circle cx="100" cy="100" r="24"/><circle cx="100" cy="100" r="4" fill="#fff"/><path d="M100 0v200M0 100h200"/></svg>
   <div class="wrap">
-    <div class="rv">
-      <span class="etiqueta">Almada · Corroios</span>
-      <h1>Precisão<br>começa <span>aqui.</span></h1>
-      <p>Formação técnica e desportiva em Tiro Olímpico, da primeira aula à competição. Num ambiente seguro, profissional e motivador.</p>
-      <div class="acoes">
+    <div>
+      <span class="etiqueta entra">Almada · Corroios</span>
+      <h1 class="entra">Precisão<br>começa <span>aqui.</span></h1>
+      <p class="entra">Formação técnica e desportiva em Tiro Olímpico, da primeira aula à competição. Num ambiente seguro, profissional e motivador.</p>
+      <div class="acoes entra">
         <a href="contactos.html#form" class="btn btn-pri">Marcar aula experimental <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a href="aulas.html" class="btn btn-sec">Ver horários</a>
+        <a href="contactos.html?tipo=atleta#form" class="btn btn-claro">Inscrever-me como atleta</a>
       </div>
+      <div class="hero-sub entra"><span>Sem experiência necessária</span><span>Sempre com treinador</span><span>Todas as idades</span></div>
     </div>
-    <div class="hero-foto rv"><img src="imagens/hero-atleta.jpg" alt="Atleta da EFTO a apontar a carabina"></div>
+    <div class="hero-foto entra"><img src="imagens/inicio/topo-foto.jpg" alt="Atleta da EFTO a apontar a carabina" fetchpriority="high"></div>
   </div>
   <a href="#factos" class="desce">Descobrir<i></i></a>
 </section>
@@ -34,17 +41,17 @@
   <div class="wrap">
     <div class="facto"><b>Iniciação</b><span>Sem experiência? Começa connosco do zero.</span></div>
     <div class="facto"><b>Competição</b><span>Provas ao fim de semana, segundo o calendário.</span></div>
-    <div class="facto"><b>1h30</b><span>por aula, sempre com treinador.</span></div>
-    <div class="facto"><b>Seg &amp; Qua</b><span>Aulas ao fim do dia, das 19h00 às 22h00.</span></div>
+    <div class="facto"><b>1h30</b><span>Por aula, sempre com treinador.</span></div>
+    <div class="facto"><b>Segunda &amp; Quarta</b><span>Aulas ao fim do dia, das 19h00 às 22h00.</span></div>
   </div>
 </section>
 
 <section class="sec">
   <div class="wrap duas-col">
     <div class="mosaico rv">
-      <img src="imagens/atletas-sorriso.jpg" alt="Atletas da escola no posto de tiro" style="object-position:30% center">
-      <img src="imagens/alvos.jpg" alt="Alvos eletrónicos da carreira de tiro">
-      <img src="imagens/inaug-podio.jpg" alt="Jovens atletas no pódio">
+      <img loading="lazy" src="imagens/inicio/escola-mosaico-1-grande.jpg" alt="Atletas da escola no posto de tiro" style="object-position:54% 25%">
+      <img loading="lazy" src="imagens/inicio/escola-mosaico-2.jpg" alt="Alvos eletrónicos da carreira de tiro">
+      <img loading="lazy" src="imagens/inicio/escola-mosaico-3.jpg" alt="Jovens atletas no pódio">
     </div>
     <div class="rv">
       <span class="etiqueta">A Escola</span>
@@ -55,17 +62,93 @@
   </div>
 </section>
 
+<!-- INCLUSIVIDADE -->
+<section class="sec branco inclusivo">
+  <div class="wrap">
+    <div class="rv">
+      <span class="etiqueta">Para todos</span>
+      <h2>Somos inclusivos e para todas as idades</h2>
+      <p class="lead">Na EFTO, o tiro olímpico é para quem quer experimentar e para quem quer competir — dos mais novos aos mais experientes. Adaptamos o treino a cada atleta.</p>
+      <div class="perfis">
+        <div class="perfil">
+          <span class="ic" style="background:var(--vermelho)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="5" r="2.5"/><path d="M8 8v7M5 11h6M8 15l-2.5 6M8 15l2.5 6"/><circle cx="17" cy="11" r="2"/><path d="M17 13.5v4M15 15h4M17 17.5l-1.5 3.5M17 17.5l1.5 3.5"/></svg></span>
+          <div><h3>Crianças e jovens</h3><p>Concentração, disciplina e autoconfiança, sempre com acompanhamento de um treinador.</p></div>
+        </div>
+        <div class="perfil">
+          <span class="ic" style="background:var(--amarelo);color:var(--tinta)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <div><h3>Adultos e seniores</h3><p>Nunca é tarde para começar. Um desporto de precisão que se pratica a qualquer idade.</p></div>
+        </div>
+        <div class="perfil">
+          <span class="ic" style="background:var(--verde)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24M1 1l22 22"/></svg></span>
+          <div><h3>Deficiência visual</h3><p>Treino adaptado para atletas com deficiência visual, com acompanhamento dedicado.</p></div>
+        </div>
+        <div class="perfil">
+          <span class="ic" style="background:var(--navy-700)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span>
+          <div><h3>Iniciação e alta competição</h3><p>Do primeiro disparo às provas de competição, cada atleta evolui ao seu ritmo.</p></div>
+        </div>
+      </div>
+      <a href="contactos.html#form" class="link-seta">Fale connosco sobre o seu caso →</a>
+    </div>
+    <div class="inclusivo-fotos rv">
+      <img loading="lazy" src="imagens/inicio/inclusivo-foto-1.jpg" alt="Jovens atletas da EFTO com o pólo da escola">
+      <img loading="lazy" src="imagens/inicio/inclusivo-foto-2.jpg" alt="Atleta sénior da EFTO ao lado de uma atleta jovem">
+    </div>
+  </div>
+</section>
+
 <section class="sec escuro">
   <div class="wrap">
     <span class="etiqueta">Como começar</span>
     <h2>Da primeira aula<br>ao pódio</h2>
     <p class="lead">Três passos simples. Não precisa de experiência — acompanhamos cada etapa.</p>
     <div class="passos">
-      <a class="passo passo-link rv" href="contactos.html#form"><img src="imagens/postos.jpg" alt="Postos de tiro"><div class="corpo"><div class="barra" style="background:var(--vermelho)"></div><h3>Aula experimental</h3><p>Conheça o espaço, as regras de segurança e faça os primeiros disparos com um treinador.</p><span class="passo-cta">Marcar aula →</span></div></a>
-      <div class="passo rv"><img src="imagens/hero-atleta.jpg" alt="Atleta em treino" style="object-position:center 30%"><div class="corpo"><div class="barra" style="background:var(--amarelo)"></div><h3>Formação contínua</h3><p>Aulas regulares de 1h30 com um plano adaptado ao seu nível.</p></div></div>
-      <a class="passo passo-link rv" href="eventos.html"><img src="imagens/inaug-grupo.jpg" alt="Atletas premiados"><div class="corpo"><div class="barra" style="background:var(--verde)"></div><h3>Competição</h3><p>Quando estiver pronto, participe nas provas organizadas na EFTO.</p><span class="passo-cta">Ver provas →</span></div></a>
+      <a class="passo passo-link rv" href="contactos.html#form"><img loading="lazy" src="imagens/inicio/passo-1-aula-experimental.jpg" alt="Postos de tiro"><div class="corpo"><div class="barra" style="background:var(--vermelho)"></div><h3>Aula experimental</h3><p>Conheça o espaço, as regras de segurança e faça os primeiros disparos com um treinador.</p><span class="passo-cta">Marcar aula →</span></div></a>
+      <div class="passo rv"><img loading="lazy" src="imagens/inicio/passo-2-formacao-continua.jpg" alt="Atleta em treino" style="object-position:center 30%"><div class="corpo"><div class="barra" style="background:var(--amarelo)"></div><h3>Formação contínua</h3><p>Aulas regulares de 1h30 com um plano adaptado ao seu nível.</p></div></div>
+      <a class="passo passo-link rv" href="eventos.html"><img loading="lazy" src="imagens/inicio/passo-3-competicao.jpg" alt="Atletas premiados"><div class="corpo"><div class="barra" style="background:var(--verde)"></div><h3>Competição</h3><p>Quando estiver pronto, participe nas provas organizadas na EFTO.</p><span class="passo-cta">Ver provas →</span></div></a>
     </div>
     <a href="aulas.html" class="link-seta">Aulas e horários →</a>
+  </div>
+</section>
+
+<!-- NOTÍCIAS: os 3 artigos mais recentes (copie da página noticias.html quando publicar um novo) -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-topo">
+      <div>
+        <span class="etiqueta" data-nome-noticias>Notícias</span>
+        <h2>Últimas da EFTO</h2>
+      </div>
+      <a href="noticias.html" class="link-seta">Ver todos os artigos →</a>
+    </div>
+    <div class="art-grid">
+      <a class="art rv" href="artigo-sports-club-madeira.html">
+        <img loading="lazy" src="imagens/noticias/artigo-sports-club-madeira.jpg" alt="Atletas e equipa do Sports Club da Madeira em frente ao painel da EFTO" style="object-position:center 40%">
+        <div class="corpo">
+          <div class="art-meta"><span class="cat">Notícias da escola</span><span>19 set 2026</span></div>
+          <h3>Sports Club da Madeira em visita à EFTO</h3>
+          <p>Os atletas madeirenses assistiram à 7.ª prova do Troféu BIG e experimentaram o equipamento da escola.</p>
+          <span class="ler">Ler mais →</span>
+        </div>
+      </a>
+      <a class="art rv" href="artigo.html">
+        <img loading="lazy" src="imagens/noticias/artigo-respiracao.jpg" alt="Atleta da EFTO a fazer pontaria" style="object-position:center 30%">
+        <div class="corpo">
+          <div class="art-meta"><span class="cat">Dicas de treino</span><span>[data]</span></div>
+          <h3>Respiração e disparo: 5 dicas para quem está a começar</h3>
+          <p>[Texto provisório] Como a respiração influencia a pontaria e que hábitos simples ajudam a manter a calma no posto de tiro.</p>
+          <span class="ler">Ler mais →</span>
+        </div>
+      </a>
+      <a class="art rv" href="artigo.html">
+        <img loading="lazy" src="imagens/noticias/artigo-resultados.jpg" alt="Jovens atletas no pódio">
+        <div class="corpo">
+          <div class="art-meta"><span class="cat">Resultados</span><span>[data]</span></div>
+          <h3>Resultados da [N.ª] jornada do Troféu BIG</h3>
+          <p>[Texto provisório] Classificações, recordes pessoais e os destaques dos atletas da EFTO na última prova.</p>
+          <span class="ler">Ler mais →</span>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -74,9 +157,9 @@
     <span class="etiqueta">Eventos</span>
     <h2>A vida na EFTO</h2>
     <div class="ev-grid">
-      <a href="eventos.html#mamona" class="ev rv" style="text-decoration:none"><img src="imagens/inaug-publico.jpg" alt=""><span class="tag">Visita</span><h3>Patrícia Mamona na EFTO</h3><p>A medalhada olímpica experimentou o Tiro Olímpico.</p></a>
-      <a href="eventos.html#campeoes" class="ev rv" style="text-decoration:none"><img src="imagens/inaug-premio.jpg" alt="" style="object-position:center 20%"><span class="tag">Prova</span><h3>Troféu dos Campeões</h3><p>Os melhores atletas frente a frente.</p></a>
-      <a href="eventos.html#madeira" class="ev rv" style="text-decoration:none"><img src="imagens/inaug-jovens.jpg" alt=""><span class="tag">Visita</span><h3>Sports Club da Madeira</h3><p>Atletas madeirenses na nossa carreira de tiro.</p></a>
+      <a href="eventos.html#mamona" class="ev rv" style="text-decoration:none"><img loading="lazy" src="imagens/eventos/visita-patricia-mamona.jpg" alt=""><span class="tag">Visita</span><h3>Patrícia Mamona na EFTO</h3><p>A medalhada olímpica experimentou o Tiro Olímpico.</p></a>
+      <a href="eventos.html#campeoes" class="ev rv" style="text-decoration:none"><img loading="lazy" src="imagens/eventos/trofeu-campeoes.jpg" alt="" style="object-position:center 20%"><span class="tag">Prova</span><h3>Troféu dos Campeões</h3><p>Os melhores atletas frente a frente.</p></a>
+      <a href="artigo-sports-club-madeira.html" class="ev rv" style="text-decoration:none"><img loading="lazy" src="imagens/eventos/visita-sports-club-madeira.jpg" alt=""><span class="tag">Visita</span><h3>Sports Club da Madeira</h3><p>Atletas madeirenses na nossa carreira de tiro.</p></a>
     </div>
     <a href="eventos.html" class="link-seta">Todos os eventos →</a>
   </div>
@@ -86,11 +169,11 @@
   <div class="wrap">
     <span class="etiqueta">Galeria</span>
     <h2>Por dentro da escola</h2>
-    <div class="gal" id="gal" data-limite="8"></div>
-    <a href="galeria.html" class="link-seta">Ver galeria completa →</a>
+    <!-- Miniaturas: mostra as primeiras fotos da galeria (muda o número em data-limite) e um quadrado "Ver mais" -->
+    <div class="gal gal-mini" id="gal" data-limite="7"></div>
   </div>
 </section>
 
-<script src="js/site.js?v=3"></script>
+<script src="js/site.js?v=12"></script>
 </body>
 </html>

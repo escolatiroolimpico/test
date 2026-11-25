@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0a1124">
 <title>Eventos · EFTO | Tiro Olímpico em Almada</title>
 <meta name="description" content="Provas, visitas e notícias da Escola de Formação de Tiro Olímpico em Almada.">
-<link rel="icon" href="imagens/logo.png">
+<link rel="icon" href="imagens/logos/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilo.css?v=3">
+<link rel="stylesheet" href="css/estilo.css?v=16">
 </head>
 <body>
 
 <section class="topo-pag">
-  <div class="fundo" style="background-image:url(imagens/inaug-publico.jpg)"></div>
+  <div class="fundo" style="background-image:url(imagens/eventos/topo-fundo.jpg)"></div>
   <div class="wrap">
     <div class="migalhas"><a href="index.html">Início</a> / Eventos</div>
     <h1>Eventos &amp; Notícias</h1>
@@ -24,37 +25,47 @@
 
 <section class="sec">
   <div class="wrap">
-    <!-- Para acrescentar um evento: copie um bloco <article> inteiro e mude o texto e a foto. -->
+    <div class="ev-vazio rv">
+      <span class="tag">Agenda</span>
+      <h2>De momento não há eventos agendados</h2>
+      <p>Estamos a preparar as próximas provas e atividades. Acompanhe a EFTO no Instagram para saber as novidades em primeira mão.</p>
+      <a class="btn btn-pri" href="https://www.instagram.com/escolatiroolimpico/" target="_blank" rel="noopener">Seguir no Instagram</a>
+    </div>
+
+    <!-- EVENTOS GUARDADOS (escondidos). Quando houver eventos novos:
+         apague o bloco "ev-vazio" acima e tire os sinais de comentário à volta desta lista.
+     Para acrescentar um evento: copie um bloco <article> inteiro e mude o texto e a foto. 
     <div class="ev-lista">
       <article class="ev-linha rv" id="mamona">
-        <img src="imagens/inaug-publico.jpg" alt="Visita à EFTO">
+        <img loading="lazy" src="imagens/eventos/visita-patricia-mamona.jpg" alt="Visita à EFTO">
         <div class="corpo"><div class="data">4 de julho de 2026</div><span class="tag">Visita</span><h3>Patrícia Mamona na EFTO</h3>
           <p>A atleta olímpica do triplo salto, medalha de prata em Tóquio 2020, visitou as nossas instalações e experimentou o Tiro Olímpico pela primeira vez. Uma tarde especial para toda a escola.</p></div>
       </article>
       <article class="ev-linha rv" id="madeira">
-        <img src="imagens/inaug-jovens.jpg" alt="Jovens atletas">
+        <img loading="lazy" src="imagens/eventos/visita-sports-club-madeira.jpg" alt="Jovens atletas">
         <div class="corpo"><div class="data">19 de setembro</div><span class="tag">Visita</span><h3>Sports Club da Madeira na EFTO</h3>
           <p>Os atletas do Sports Club da Madeira assistiram à 7.ª jornada do Troféu BIG e aproveitaram para experimentar o equipamento da escola.</p></div>
       </article>
       <article class="ev-linha rv" id="campeoes">
-        <img src="imagens/inaug-premio.jpg" alt="Atleta premiada" style="object-position:center 20%">
+        <img loading="lazy" src="imagens/eventos/trofeu-campeoes.jpg" alt="Atleta premiada" style="object-position:center 20%">
         <div class="corpo"><div class="data">Competição</div><span class="tag">Prova</span><h3>Troféu dos Campeões</h3>
           <p>A prova que junta os melhores atletas da temporada frente a frente na nossa carreira de tiro.</p></div>
       </article>
       <article class="ev-linha rv" id="bigman">
-        <img src="imagens/inaug-treinador.jpg" alt="Atletas em prova">
+        <img loading="lazy" src="imagens/eventos/provas-bigman.jpg" alt="Atletas em prova">
         <div class="corpo"><div class="data">Calendário anual</div><span class="tag">Provas</span><h3>Provas BigMan</h3>
           <p>Série de provas disputadas na EFTO ao longo do ano, aos fins de semana, conforme o calendário.</p></div>
       </article>
       <article class="ev-linha rv" id="inband">
-        <img src="imagens/alvo-13.jpg" alt="Alvos eletrónicos">
+        <img loading="lazy" src="imagens/eventos/provas-inband.jpg" alt="Alvos eletrónicos">
         <div class="corpo"><div class="data">Calendário anual</div><span class="tag">Provas</span><h3>Provas Inband</h3>
           <p>Competições disputadas com alvos eletrónicos, com resultados em tempo real.</p></div>
       </article>
     </div>
+    -->
   </div>
 </section>
 
-<script src="js/site.js?v=3"></script>
+<script src="js/site.js?v=12"></script>
 </body>
 </html>
