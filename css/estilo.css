@@ -381,6 +381,17 @@ form [hidden]{display:none}
 .disp-opcoes label:has(input:checked){border-color:var(--navy-700);background:#fff}
 .disp-opcoes input{width:auto;margin:0;accent-color:var(--navy-700)}
 .disp .nota{font-size:.82rem;color:var(--cinza)}
+.disp-opcoes label{min-width:0}
+/* No telemóvel as 3 opções não cabem lado a lado: ficam umas por baixo das outras */
+@media (max-width:560px){.disp-opcoes{grid-template-columns:1fr}}
+/* Cartões de contacto: o email comprido não pode empurrar o cartão para fora do ecrã */
+.ct-grid>*{min-width:0}
+.ct-item>span:last-child{min-width:0}
+.ct-item b{overflow-wrap:anywhere}
+@media (max-width:560px){.ct-item{padding:16px;gap:12px}}
+/* Tabela da página de privacidade: cabe nos telemóveis mais estreitos */
+.texto-legal td,.texto-legal th{overflow-wrap:anywhere}
+@media (max-width:560px){.texto-legal table{font-size:.85rem}.texto-legal th,.texto-legal td{padding:8px 6px}}
 .consent a{color:var(--tinta)}
 
 /* ---------- MAPA bloqueado até aceitar cookies ---------- */
