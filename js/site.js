@@ -136,7 +136,7 @@ ${semCta ? "" : `<section class="cta"><div class="wrap"><h2>Pronto para o<br>pri
         <div class="redes"><a href="${INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">${ICONES.ig}</a><a href="${FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">${ICONES.fb}</a><a href="${YOUTUBE}" target="_blank" rel="noopener" aria-label="YouTube">${ICONES.yt}</a></div></div>
       <div><h4>Páginas</h4><ul>${MENU.map(([u, n]) => `<li><a href="${u}">${n}</a></li>`).join("")}</ul></div>
       <div><h4>Aulas</h4><ul><li>Segunda e quarta</li><li>19:00 – 20:30</li><li>20:30 – 22:00</li></ul>
-        <div class="rod-cta"><a class="btn btn-pri" href="contactos.html#form">Aula experimental</a><a class="btn btn-contorno" href="contactos.html?tipo=atleta#form">Inscrever-me como atleta</a></div></div>
+        <div class="rod-cta"><a class="btn btn-pri" href="contactos.html#form">Aula experimental</a><a class="btn btn-contorno" href="contactos.html?tipo=treino#form">Treino livre</a></div></div>
       <div><h4>Contacto</h4><ul>
         <li class="ic-linha">${ic('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>')}<a href="${telLink}">${TELEFONE}</a></li>
         <li class="ic-linha">${ic('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>')}<a href="mailto:${EMAIL}">${EMAIL}</a></li>
@@ -256,34 +256,125 @@ if (gal) {
    a caixa da escola — é preciso clicar em "Activate Form" uma única vez. */
 const form = document.getElementById("form");
 
-/* Formulário com 2 tipos de pedido: "Aula experimental" ou "Inscrição como atleta".
-   O link contactos.html?tipo=atleta#form abre logo na inscrição. */
+/* Formulário com 2 tipos de pedido: "Aula experimental" ou "Treino livre".
+   O link contactos.html?tipo=treino#form abre logo no treino livre
+   (o link antigo ?tipo=atleta continua a funcionar).
+   msgObrig = se a mensagem é obrigatória nesse tipo de pedido. */
 const TIPOS = {
-  aula:   { titulo: "Pedido de aula experimental", assunto: "Novo pedido de aula experimental", msg: "Idade, experiência anterior, dúvidas…", turma: "Turma preferida" },
-  atleta: { titulo: "Inscrição como atleta",       assunto: "Nova inscrição de atleta",          msg: "Idade, disciplina (carabina/pistola), clube atual, experiência…", turma: "Turma pretendida" },
+  aula:   { titulo: "Pedido de aula experimental", assunto: "Novo pedido de aula experimental", msgObrig: true,
+            msg: "Idade, experiência anterior, dúvidas…",
+            ok: "Pedido enviado! Entraremos em contacto consigo muito em breve." },
+  treino: { titulo: "Pedido de treino livre",      assunto: "Novo pedido de treino livre",      msgObrig: false,
+            msg: "Disciplina (carabina/pistola), dias em que gostaria de treinar, dúvidas…",
+            ok: "Pedido de treino livre enviado! Entraremos em contacto consigo muito em breve." },
 };
-let tipoPedido = new URLSearchParams(location.search).get("tipo") === "atleta" ? "atleta" : "aula";
+const tipoUrl = new URLSearchParams(location.search).get("tipo");
+let tipoPedido = tipoUrl === "treino" || tipoUrl === "atleta" ? "treino" : "aula";
+
+/* Mensagens de erro de cada campo obrigatório */
+const ERROS = {
+  nome:      "Indique o seu nome e apelido.",
+  tel:       "Indique o seu número de telefone.",
+  email:     "Indique o seu email.",
+  federacao: "Indique o seu número de atleta da Federação.",
+  msg:       "Escreva uma mensagem.",
+  consent:   "Tem de aceitar a Política de Privacidade para enviarmos o pedido.",
+};
+/* Devolve o texto do erro de um campo, ou "" se estiver bem preenchido */
+const erroDe = campo => {
+  if (campo.disabled) return "";
+  const v = campo.type === "checkbox" ? (campo.checked ? "x" : "") : campo.value.trim();
+  if (campo.required && !v) return ERROS[campo.name] || "Preencha este campo.";
+  if (!v) return "";
+  if (campo.name === "nome" && v.split(/\s+/).length < 2) return "Indique o nome e também o apelido.";
+  if (campo.name === "tel" && v.replace(/\D/g, "").length < 9) return "Indique um número de telefone válido (pelo menos 9 dígitos).";
+  if (campo.name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return "Indique um email válido (ex.: nome@exemplo.pt).";
+  return "";
+};
+/* Mostra (ou apaga) a mensagem de erro por baixo do campo */
+const mostraErro = (campo, texto) => {
+  /* o erro fica dentro do campo, por baixo da caixa; na caixa de aceitar fica por baixo da frase */
+  const caixa = campo.closest("label");
+  const fora = caixa.classList.contains("consent");
+  let p = fora ? caixa.nextElementSibling : caixa.querySelector(".erro-campo");
+  const existe = p && p.classList.contains("erro-campo");
+  if (!existe && !texto) return; // sem erro e sem caixa: não há nada a fazer
+  if (!existe) {
+    p = document.createElement("span");
+    p.className = "erro-campo"; p.id = "erro-" + campo.name;
+    fora ? caixa.after(p) : caixa.append(p);
+    campo.setAttribute("aria-describedby", p.id);
+  }
+  p.textContent = texto;
+  campo.toggleAttribute("aria-invalid", !!texto);
+};
+const camposObrig = () => [...form.querySelectorAll("[required]")];
+
 if (form) {
   form.insertAdjacentHTML("afterbegin", `<div class="form-tipo" role="group" aria-label="Tipo de pedido">
-    <button type="button" data-tipo="aula">Aula experimental</button><button type="button" data-tipo="atleta">Inscrição como atleta</button></div>`);
+    <button type="button" data-tipo="aula">Aula experimental</button><button type="button" data-tipo="treino">Treino livre</button></div>`);
   const mudaTipo = t => {
     tipoPedido = t;
     form.querySelectorAll("[data-tipo]").forEach(b => b.setAttribute("aria-pressed", b.dataset.tipo === t));
     form.querySelector("h3").textContent = TIPOS[t].titulo;
-    const msg = form.querySelector("textarea[name=msg]"); if (msg) msg.placeholder = TIPOS[t].msg;
-    const lt = form.querySelector("select[name=turma]")?.closest("label"); if (lt) lt.firstChild.textContent = TIPOS[t].turma;
+    /* mostra só os campos deste tipo; os escondidos ficam desligados (não são validados nem enviados) */
+    form.querySelectorAll("[data-so]").forEach(bloco => {
+      const ativo = bloco.dataset.so === t;
+      bloco.hidden = !ativo;
+      bloco.querySelectorAll("input,select,textarea").forEach(c => { c.disabled = !ativo; if (!ativo) mostraErro(c, ""); });
+    });
+    /* a mensagem é obrigatória na aula experimental e opcional no treino livre */
+    const msg = form.querySelector("textarea[name=msg]");
+    msg.placeholder = TIPOS[t].msg;
+    msg.required = TIPOS[t].msgObrig;
+    form.querySelector(".rotulo-msg").innerHTML = TIPOS[t].msgObrig
+      ? 'Mensagem <span class="obrig">*</span>' : 'Mensagem <small class="opc">(opcional)</small>';
+    mostraErro(msg, "");
+    atualizaBotao();
   };
   form.querySelector(".form-tipo").addEventListener("click", e => { const b = e.target.closest("[data-tipo]"); if (b) mudaTipo(b.dataset.tipo); });
   mudaTipo(tipoPedido);
+  /* sempre que algo muda: o erro desaparece logo quando o campo é corrigido,
+     e o botão "Enviar pedido" liga/desliga conforme os obrigatórios */
+  const aoMudar = e => {
+    if (e.target.hasAttribute("aria-invalid")) mostraErro(e.target, erroDe(e.target));
+    atualizaBotao();
+  };
+  form.addEventListener("input", aoMudar);
+  form.addEventListener("change", aoMudar);
+  /* ao sair de um campo obrigatório mal preenchido, mostra o erro por baixo dele */
+  form.addEventListener("focusout", e => { if (e.target.required) mostraErro(e.target, erroDe(e.target)); });
+}
+
+/* O botão "Enviar pedido" só fica disponível quando todos os campos obrigatórios estão bem preenchidos.
+   Enquanto não estiverem, aparece por baixo a nota "Preencha os campos obrigatórios…". */
+function atualizaBotao() {
+  const botao = form.querySelector("button[type=submit]");
+  if (botao.dataset.aEnviar) return; // durante o envio, o botão fica desligado
+  const falta = camposObrig().some(c => erroDe(c));
+  botao.disabled = falta;
+  document.getElementById("faltaPreencher").hidden = !falta;
 }
 
 if (form) form.addEventListener("submit", async e => {
   e.preventDefault();
+  /* 1.º verifica os campos obrigatórios; se algum falhar, mostra o erro e não envia */
+  let primeiroErro = null;
+  camposObrig().forEach(c => {
+    const texto = erroDe(c);
+    mostraErro(c, texto);
+    if (texto && !primeiroErro) primeiroErro = c;
+  });
+  if (primeiroErro) { primeiroErro.focus(); return; }
+
   const d = new FormData(form);
   if (d.get("_honey")) return; // proteção contra robôs de spam
+  const extra = tipoPedido === "aula"
+    ? { "Disponibilidade": d.getAll("disp").join(", ") || "(não indicada)" }
+    : { "Número de atleta (Federação)": d.get("federacao").trim(), "Clube": d.get("clube")?.trim() || "(não indicado)" };
   const botao = form.querySelector("button[type=submit]");
   const estado = document.getElementById("estadoForm");
-  botao.disabled = true; botao.dataset.txt = botao.innerHTML; botao.textContent = "A enviar…";
+  botao.disabled = true; botao.dataset.aEnviar = "1"; botao.dataset.txt = botao.innerHTML; botao.textContent = "A enviar…";
   estado.className = "estado"; estado.textContent = "";
   try {
     const r = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
@@ -293,27 +384,26 @@ if (form) form.addEventListener("submit", async e => {
         _subject: `${TIPOS[tipoPedido].assunto} — ${d.get("nome")}`,
         _template: "table",
         _captcha: "false",
-        _replyto: d.get("email") || undefined,
+        _replyto: d.get("email"),
         "Tipo de pedido": TIPOS[tipoPedido].titulo,
-        "Nome": d.get("nome"),
-        "Telefone": d.get("tel"),
-        "Email": d.get("email") || "(não indicado)",
-        "Turma preferida": d.get("turma"),
-        "Mensagem": d.get("msg") || "(sem mensagem)",
+        "Nome e apelido": d.get("nome").trim(),
+        "Telefone": d.get("tel").trim(),
+        "Email": d.get("email").trim(),
+        ...extra,
+        "Mensagem": d.get("msg").trim() || "(sem mensagem)",
       }),
     });
     const res = await r.json().catch(() => ({}));
     if (!r.ok || res.success === "false" || res.success === false) throw new Error(res.message || "erro");
     form.reset();
     estado.className = "estado ok";
-    estado.textContent = tipoPedido === "atleta"
-      ? "Inscrição enviada! Entraremos em contacto consigo muito em breve."
-      : "Pedido enviado! Entraremos em contacto consigo muito em breve.";
+    estado.textContent = TIPOS[tipoPedido].ok;
   } catch (err) {
     estado.className = "estado erro";
     estado.innerHTML = `Não foi possível enviar agora. Ligue-nos para o <a href="${telLink}">${TELEFONE}</a> ou escreva para <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
   } finally {
-    botao.disabled = false; botao.innerHTML = botao.dataset.txt;
+    botao.innerHTML = botao.dataset.txt; delete botao.dataset.aEnviar;
+    atualizaBotao(); // depois de enviar o formulário fica vazio, por isso o botão volta a ficar desligado
   }
 });
 

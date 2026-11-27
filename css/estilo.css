@@ -324,7 +324,7 @@ form h3{font-size:2.4rem}
 label{font-size:.85rem;font-weight:600;display:grid;gap:6px}
 input,select,textarea{font:inherit;padding:13px 15px;border:1.5px solid var(--linha);border-radius:3px;background:var(--papel);width:100%}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy-700);background:#fff}
-.duas{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
 .consent{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:.85rem;color:var(--cinza)}
 .consent input{width:auto;margin-top:4px}
 form .btn{justify-content:center}
@@ -355,11 +355,32 @@ footer a:hover{color:var(--amarelo)}
 
 /* ---------- FORMULÁRIO: mensagens ---------- */
 form{position:relative}
-form button[disabled]{opacity:.7;cursor:wait}
+form button[disabled]{opacity:.45;cursor:not-allowed}
+form button[data-a-enviar]{opacity:.7;cursor:wait}
+.falta-preencher{font-size:.82rem;color:var(--cinza);text-align:center;margin-top:-6px}
 .estado{font-size:.95rem;border-radius:3px}
 .estado:empty{display:none}
 .estado.ok{background:#e5f4e6;border-left:4px solid var(--verde);padding:14px 16px;color:#1d5a22;font-weight:600}
 .estado.erro{background:#fde8e9;border-left:4px solid var(--vermelho);padding:14px 16px;color:#8a1219}
+/* Formulário: campos obrigatórios, opcionais e mensagens de erro */
+.obrig{color:var(--vermelho)}
+.opc{font-weight:400;color:var(--cinza)}
+.obrig-nota{font-size:.8rem;color:var(--cinza);margin-top:-8px}
+.erro-campo{display:block;color:#b3141d;font-size:.82rem;font-weight:600}
+.consent + .erro-campo{margin-top:-10px}
+.erro-campo:empty{display:none}
+.erro-campo::before{content:"⚠ "}
+[aria-invalid]:not([type=checkbox]){border-color:#b3141d;background:#fff6f6}
+.consent [aria-invalid]{outline:2px solid #b3141d;outline-offset:2px}
+form [hidden]{display:none}
+/* Disponibilidade (escolha múltipla) */
+.disp{border:0;padding:0;margin:0;display:grid;gap:8px;min-width:0}
+.disp legend{font-size:.85rem;font-weight:600;padding:0;margin-bottom:6px}
+.disp-opcoes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.disp-opcoes label{display:flex;align-items:center;gap:10px;font-weight:400;font-size:.9rem;padding:11px 13px;border:1.5px solid var(--linha);border-radius:3px;background:var(--papel);cursor:pointer}
+.disp-opcoes label:has(input:checked){border-color:var(--navy-700);background:#fff}
+.disp-opcoes input{width:auto;margin:0;accent-color:var(--navy-700)}
+.disp .nota{font-size:.82rem;color:var(--cinza)}
 .consent a{color:var(--tinta)}
 
 /* ---------- MAPA bloqueado até aceitar cookies ---------- */

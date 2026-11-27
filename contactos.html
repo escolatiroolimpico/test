@@ -9,7 +9,7 @@
 <link rel="icon" href="imagens/logos/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/estilo.css?v=16">
+<link rel="stylesheet" href="css/estilo.css?v=19">
 </head>
 <body data-sem-cta>
 
@@ -33,24 +33,38 @@
       <a class="ct-item" href="https://maps.google.com/?q=Rua+Ferreira+Soares+58+2810-296+Almada" target="_blank" rel="noopener"><span class="ic" style="background:var(--verde)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span><small>Morada</small><b>Rua Ferreira Soares, 58, Lote 130<br>2810-296 Almada</b></span></a>
       <div data-mapa="https://maps.google.com/maps?q=Rua%20Ferreira%20Soares%2058%2C%202810-296%20Almada&z=15&output=embed"></div>
     </div>
-    <form id="form">
+    <!-- Os campos com data-so="aula" ou data-so="treino" só aparecem nesse tipo de pedido (ver js/site.js) -->
+    <form id="form" novalidate>
       <h3>Pedido de aula experimental</h3>
+      <p class="obrig-nota">Os campos com <span class="obrig">*</span> são obrigatórios.</p>
       <div class="duas">
-        <label>Nome<input name="nome" required placeholder="O seu nome"></label>
-        <label>Telefone<input name="tel" type="tel" required placeholder="9xx xxx xxx"></label>
+        <label><span>Nome e apelido <span class="obrig">*</span></span><input name="nome" required autocomplete="name" placeholder="Ex.: João Silva"></label>
+        <label><span>Telefone <span class="obrig">*</span></span><input name="tel" type="tel" required autocomplete="tel" placeholder="9xx xxx xxx"></label>
       </div>
-      <label>Email<input name="email" type="email" placeholder="nome@exemplo.pt"></label>
-      <label>Turma preferida
-        <select name="turma"><option>Segunda · 19:00–20:30</option><option>Segunda · 20:30–22:00</option><option>Quarta · 19:00–20:30</option><option>Quarta · 20:30–22:00</option><option>Ainda não sei</option></select></label>
-      <label>Mensagem<textarea name="msg" rows="4" placeholder="Idade, experiência anterior, dúvidas…"></textarea></label>
+      <label><span>Email <span class="obrig">*</span></span><input name="email" type="email" required autocomplete="email" placeholder="nome@exemplo.pt"></label>
+      <div class="duas" data-so="treino">
+        <label><span>Número de atleta (Federação) <span class="obrig">*</span></span><input name="federacao" required inputmode="numeric" placeholder="Ex.: 12345"></label>
+        <label><span>Clube <small class="opc">(opcional)</small></span><input name="clube" placeholder="O seu clube"></label>
+      </div>
+      <fieldset class="disp" data-so="aula">
+        <legend>Disponibilidade <small class="opc">(opcional)</small></legend>
+        <div class="disp-opcoes">
+          <label><input type="radio" name="disp" value="Segunda"> Segunda</label>
+          <label><input type="radio" name="disp" value="Quarta"> Quarta</label>
+          <label><input type="radio" name="disp" value="Ambos (segunda e quarta)"> Ambos</label>
+        </div>
+        <p class="nota">Entraremos em contacto para marcar a sua aula experimental conforme a disponibilidade.</p>
+      </fieldset>
+      <label><span class="rotulo-msg">Mensagem</span><textarea name="msg" rows="4" placeholder="Idade, experiência anterior, dúvidas…"></textarea></label>
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-      <label class="consent"><input type="checkbox" required> <span>Aceito que a EFTO use estes dados para me contactar, de acordo com a <a href="privacidade.html">política de privacidade</a>.</span></label>
+      <label class="consent"><input type="checkbox" name="consent" required> <span>Aceito que a EFTO use estes dados para me contactar, de acordo com a <a href="privacidade.html">Política de Privacidade</a>. <span class="obrig">*</span></span></label>
       <button class="btn btn-pri" type="submit">Enviar pedido <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="falta-preencher" id="faltaPreencher">Preencha os campos obrigatórios (<span class="obrig">*</span>) para enviar o pedido.</p>
       <p id="estadoForm" class="estado" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
 
-<script src="js/site.js?v=12"></script>
+<script src="js/site.js?v=14"></script>
 </body>
 </html>
